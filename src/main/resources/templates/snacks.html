@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Snacks')">
+</head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<h1>SNACKLIJST</h1>
+<p>Aantal snacks: <span th:text="${aantalSnacks}"></span></p>
+
+<ul class="zebra">
+    <li th:each="snack:${snacks}" th:object="${snack}">
+        <span th:text="|*{naam} EUR *{{prijs}}|"></span>
+    </li>
+</ul>
+
+<p>De kleur is: <span th:text="${kleur}"></span></p>
+<p><span th:if="${reedsBezocht}">Al eerder bezocht.</span></p>
+
+
+
+</body>
+</html>

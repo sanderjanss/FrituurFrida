@@ -30,7 +30,8 @@ public class JdbcSnackRepositoryTest extends AbstractTransactionalJUnit4SpringCo
     private JdbcSnackRepository jdbcSnackRepository;
 
     private long idVanTestSnack(){
-        return super.jdbcTemplate.queryForObject("select id from snacks where naam = 'test' ", Long.class);
+        String sql = "select id from snacks where naam = 'test'";
+        return super.jdbcTemplate.queryForObject(sql, Long.class);
     }
 
     @Test

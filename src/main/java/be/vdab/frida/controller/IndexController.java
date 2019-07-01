@@ -5,22 +5,19 @@ import be.vdab.frida.domain.Gemeente;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @RequestMapping("/")
 class IndexController {
     private Calendar c = Calendar.getInstance();
     private int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-    private final AtomicInteger aantalKeerBekeken = new AtomicInteger();
 
     public String welkeDagZijnWe (){
         if (dayOfWeek == 2 || dayOfWeek == 5){
@@ -33,10 +30,11 @@ class IndexController {
 
     @GetMapping
     public ModelAndView index (@CookieValue(name = "reedsBezocht", required = false)
-            String reedsBezocht, HttpServletResponse response){
+            String reedsBezocht, @CookieValue(name = "kleur", required = false) String kleur, HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView("index", "index", welkeDagZijnWe());
         modelAndView.addObject("adres", new Adres("Vettige Frietjes Laan", "33"));
         modelAndView.addObject("gemeente", new Gemeente("Antwerpen", 2000));
+        modelAndView.addObject("kleur", kleur);
 
         Cookie cookie = new Cookie("reedsBezocht", "ja");
         cookie.setMaxAge(31_536_000);
