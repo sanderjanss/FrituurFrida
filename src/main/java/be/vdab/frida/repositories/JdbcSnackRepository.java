@@ -66,4 +66,13 @@ public class JdbcSnackRepository implements SnackRepository {
         String sql = "select id, naam, prijs from snacks where prijs between ? and ? order by prijs";
         return template.query(sql, snackMapper, van, tot);
     }
+
+    @Override
+    public long create(Snack snack) {
+        Map<String, Object> kolomWaarden = new HashMap<>();
+        kolomWaarden.put("naam", snack.getNaam());
+        kolomWaarden.put("prijs", snack.getPrijs());
+        Number id = insert.executeAndReturnKey(kolomWaarden);
+        return id.longValue();
+    }
 }

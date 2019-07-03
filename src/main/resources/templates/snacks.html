@@ -4,6 +4,8 @@
 </head>
 <body>
 <nav th:replace="fragments::menu"></nav>
+<div th:if="${param.toegevoegd}!=null" class="boodschap">Snack is toegevoegd.
+    Hij heeft het nummer <span th:text="${param.toegevoegd}"></span>.</div>
 <h1>SNACKLIJST</h1>
 <p>Aantal snacks: <span th:text="${aantalSnacks}"></span></p>
 

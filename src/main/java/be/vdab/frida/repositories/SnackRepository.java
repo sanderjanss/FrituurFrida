@@ -12,4 +12,5 @@ public interface SnackRepository {
     List<Snack> findByBeginNaam(String letter);
     List<Snack> findAll();
     List<Snack> findByPrijsBetween(BigDecimal van, BigDecimal tot);
+    long create(Snack snack);
 }

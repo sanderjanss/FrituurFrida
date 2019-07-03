@@ -2,7 +2,7 @@
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Frituur Frida')"></head>
 
-<body>
+<body th:class="${kleur}">
 <nav th:replace="fragments::menu"></nav>
 <h1><span th:if="${reedsBezocht}">Welkom terug bij: </span>Frituur Frida</h1>
 
@@ -23,6 +23,9 @@
 </dl>
 
 <p>De kleur is: <span th:text="${kleur}"></span></p>
+
+<div th:if="${param.snackNietGevonden} != null" class="fout">Snack
+    <span th:text="${param.snackNietGevonden}"></span> niet gevonden</div>
 
 </body>
 </html>

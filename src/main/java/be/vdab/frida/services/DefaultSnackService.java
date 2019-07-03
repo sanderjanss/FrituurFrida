@@ -50,4 +50,10 @@ public class DefaultSnackService implements SnackService{
     public List<Snack> findByPrijsBetween(BigDecimal van, BigDecimal tot) {
         return snackRepository.findByPrijsBetween(van, tot);
     }
+
+    @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+    public long create(Snack snack) {
+        return snackRepository.create(snack);
+    }
 }

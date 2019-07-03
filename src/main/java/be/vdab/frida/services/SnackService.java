@@ -14,4 +14,5 @@ public interface SnackService {
     List<Snack> findAll();
     long findAantalSnacks();
     List<Snack> findByPrijsBetween(BigDecimal van, BigDecimal tot);
+    long create(Snack snack);
 }
