@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Identificatie')">
+
+</head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<div class="container">
+    <h3>Email Identificatie</h3>
+<form th:object="${identificatie}" method="post" action="identificatie">
+    <div class="form-group col-md-4">
+    <label>Email Adres: <span th:errors="*{emailAdres}"></span><input th:field="*{emailAdres}" class="form-control" autofocus required type="email"></label>
+    <input class="btn btn-success btn-block mb-4 col-md-8" type="submit" value="Submit">
+    </div>
+
+</form>
+</div>
+</body>
+</html>

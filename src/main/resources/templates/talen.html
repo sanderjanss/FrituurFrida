@@ -1,8 +1,13 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Taal')"></head>
-<body>
+<body th:class="${kleur}">
 <nav th:replace="fragments::menu"></nav>
 <h1>U spreekt <span th:if="not ${nederlands}">geen </span>Nederlands.</h1>
+<br>
+<p>Ook hier zie je het effect van de cookie met kleur: <span th:text="${kleur}"></span></p>
+
+<p>In mandje: </p>
+
 </body>
 </html>

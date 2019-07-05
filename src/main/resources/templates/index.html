@@ -22,7 +22,7 @@
     <dd th:text="*{postCode}"></dd>
 </dl>
 
-<p>De kleur is: <span th:text="${kleur}"></span></p>
+<p>Email Adres: <span th:text="${identificatie.emailAdres}"></span></p>
 
 <div th:if="${param.snackNietGevonden} != null" class="fout">Snack
     <span th:text="${param.snackNietGevonden}"></span> niet gevonden</div>

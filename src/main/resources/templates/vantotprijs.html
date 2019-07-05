@@ -5,17 +5,22 @@
 </head>
 <body>
 <nav th:replace="fragments::menu"></nav>
-<h1>PrijsKlasses zoeken</h1>
-
-
+<div class="container">
 <form th:object="${vanTotPrijsForm}" method="get" th:action="@{/snacks/vantotprijs}">
-<label>Van: <span th:errors="*{van}"></span><input th:field="*{van}" type="number" autofocus required min="0"></label>
-<label>Tot: <span th:errors="*{tot}"></span><input th:field="*{tot}" type="number" required min="0"></label>
-<input type="submit" value="Submit">
+    <div class="form-group col-md-10">
+        <h1>PrijsKlasses zoeken</h1>
+        <label>Van: <span th:errors="*{van}"></span><input class="form-control" th:field="*{van}" type="number" autofocus required
+                                                           min="0"></label>
+        <label>Tot: <span th:errors="*{tot}"></span><input class="form-control" th:field="*{tot}" type="number" required
+                                                           min="0"></label>
+
+        <input class="btn btn-success btn-block mb-4 col-md-2" type="submit" value="Submit">
+    </div>
 </form>
-<ul th:if="${snacks} != null">
-    <li th:each="snack:${snacks}" th:object="${snack}" th:text="|*{naam} EUR *{prijs}|"></li>
+<ul class="list-group list-group-flush" th:if="${snacks} != null">
+    <li class="list-group-item" th:each="snack:${snacks}" th:object="${snack}" th:text="|*{naam} EUR *{prijs}|"></li>
 
 </ul>
+</div>
 </body>
 </html>

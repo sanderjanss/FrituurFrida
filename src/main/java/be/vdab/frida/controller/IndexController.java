@@ -2,6 +2,7 @@ package be.vdab.frida.controller;
 
 import be.vdab.frida.domain.Adres;
 import be.vdab.frida.domain.Gemeente;
+import be.vdab.frida.sessions.Identificatie;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +31,10 @@ class IndexController {
 
     @GetMapping
     public ModelAndView index (@CookieValue(name = "reedsBezocht", required = false)
-            String reedsBezocht, @CookieValue(name = "kleur", required = false) String kleur, HttpServletResponse response){
+            String reedsBezocht, HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView("index", "index", welkeDagZijnWe());
         modelAndView.addObject("adres", new Adres("Vettige Frietjes Laan", "33"));
         modelAndView.addObject("gemeente", new Gemeente("Antwerpen", 2000));
-        modelAndView.addObject("kleur", kleur);
 
         Cookie cookie = new Cookie("reedsBezocht", "ja");
         cookie.setMaxAge(31_536_000);
@@ -46,6 +46,7 @@ class IndexController {
 
         return modelAndView;
     }
+
 
 
 

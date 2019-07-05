@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Mandje')">
+    <script src="mandjeButtons.js"></script>
+</head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<div class="container">
+    <h1>Mandje</h1>
+    <form method="post">
+        <div class="form-group col-md-4">
+            <label>Snacks
+                <select name="id">
+                    <option th:each="snack:${alleSnacks}" th:object="${snack}"
+                            th:text="*{naam}" th:value="*{id}"></option>
+                </select>
+            </label>
+            <button onclick="document.getElementById('submit')" class="btn btn-danger btn-block mb-4 col-md-8" type="submit" value="Remove"></button>
+            <button id="remove" class="btn btn-success btn-block mb-4 col-md-8" type="submit" value="Submit"></button>
+        </div>
+    </form>
+    <h1 th:if="${snacksInMandje} != null">Snacks in mandje:</h1>
+    <ul class="list-group list-group-flush" th:if="${snacksInMandje} != null">
+        <li class="list-group-item" th:each="snack:${snacksInMandje}" th:text="${snack.naam}"></li>
+    </ul>
+    <script th:src="@{/js/preventDoubleSubmit.js}"></script>
+</div>
+</body>
+</html>

@@ -77,26 +77,26 @@ input[type='checkbox'] {
 	display: inline;
 }
 
-nav ul {
-	background-color: dodgerblue;
-	padding: 0.4em 0;
-}
+/*nav ul {*/
+/*	background-color: dodgerblue;*/
+/*	padding: 0.4em 0;*/
+/*}*/
 
-nav li {
-	display: inline;
-}
+/*nav li {*/
+/*	display: inline;*/
+/*}*/
 
-nav li a {
-	color: white;
-	font-weight: bold;
-	padding-left: 0.5em;
-	text-decoration: none;
-	vertical-align: middle;
-}
+/*nav li a {*/
+/*	color: white;*/
+/*	font-weight: bold;*/
+/*	padding-left: 0.5em;*/
+/*	text-decoration: none;*/
+/*	vertical-align: middle;*/
+/*}*/
 
-nav li a:hover {
-	color: #F7FFCC;
-}
+/*nav li a:hover {*/
+/*	color: #F7FFCC;*/
+/*}*/
 
 ul.zebra {
 	list-style: none;

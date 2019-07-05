@@ -4,16 +4,22 @@
 
 <body>
 <nav th:replace="fragments::menu"></nav>
-<h3>Toevoegpagina</h3>
-
-<form th:object="${snack}" method="post" th:action="@{/snacks}">
-    <label>Naam:<span th:errors="*{naam}"></span>
-        <input th:field="*{naam}" autofocus required></label>
-    <label>Prijs:<span th:errors="*{prijs}"></span>
-        <input th:field="*{prijs}" type="number" required min="0"></label>
-    <input type="hidden" name="id" value="0"/>
-    <input type="submit" value="Toevoegen">
-</form>
+<div class="jumbotron text-center">
+    <h2 class="card-title h2"><a href="/">Toevoegpagina</a></h2>
+    <p class="blue-text my-4">Voeg hier snacks toe.</p>
+    <hr class="my-4"/>
+    <div class="container">
+        <form th:object="${snack}" method="post" th:action="@{/snacks}">
+            <div class="form-group col-md-2">
+                <label>Naam:<span th:errors="*{naam}"></span> <input class="form-control" th:field="*{naam}" autofocus required></label>
+                <label>Prijs:<span th:errors="*{prijs}"></span> <input class="form-control" th:field="*{prijs}" type="number" required min="0"></label>
+                <input type="hidden" name="id" value="0"/>
+                <input class="btn btn-success btn-block mb-4" type="submit" value="Toevoegen">
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
