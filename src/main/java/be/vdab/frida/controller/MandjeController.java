@@ -23,8 +23,10 @@ public class MandjeController {
         this.snackService = snackService;
     }
 
-    @GetMapping
-    public ModelAndView toonMandje(){
+
+
+    @GetMapping()
+    public ModelAndView toonMandje1(){
         List<Snack> alleSnacks = snackService.findAll();
         ModelAndView modelAndView = new ModelAndView("mandje").addObject("alleSnacks", alleSnacks);
         if(mandje.isGevuld()){
@@ -32,15 +34,22 @@ public class MandjeController {
         }
         return modelAndView;
     }
+
     @PostMapping("voegtoe")
-    public String voegToe(long id){
+    public String voegToe(Long id){
         mandje.voegToe(id);
         return "redirect:/mandje";
     }
 
     @PostMapping("verwijder")
     public String verwijder(long id){
-        mandje.verwijder(id);
+            mandje.verwijder(Long.valueOf(id));
+            return "redirect:/mandje";
+    }
+
+    @PostMapping("legen")
+    public String maakLeeg(){
+        mandje.maakLeeg();
         return "redirect:/mandje";
     }
 }

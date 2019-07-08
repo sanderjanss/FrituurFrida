@@ -1,5 +1,6 @@
 package be.vdab.frida.controller;
 
+import be.vdab.frida.sessions.Mandje;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;

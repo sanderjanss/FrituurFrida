@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Mandje')">
-    <script src="mandjeButtons.js"></script>
 </head>
 <body>
 <nav th:replace="fragments::menu"></nav>
 <div class="container">
     <h1>Mandje</h1>
-    <form method="post">
+    <form method="post"  action="/mandje/voegtoe">
         <div class="form-group col-md-4">
             <label>Snacks
                 <select name="id">
@@ -15,15 +14,31 @@
                             th:text="*{naam}" th:value="*{id}"></option>
                 </select>
             </label>
-            <button onclick="document.getElementById('submit')" class="btn btn-danger btn-block mb-4 col-md-8" type="submit" value="Remove"></button>
-            <button id="remove" class="btn btn-success btn-block mb-4 col-md-8" type="submit" value="Submit"></button>
+            <input class="btn btn-success btn-block mb-4" type="submit" value="Submit">
         </div>
     </form>
+
+    <form method="post" action="/mandje/verwijder">
+        <div class="form-group col-md-4">
+            <p th:if="${snacksInMandje} == null">Je mandje is leeg.</p>
     <h1 th:if="${snacksInMandje} != null">Snacks in mandje:</h1>
     <ul class="list-group list-group-flush" th:if="${snacksInMandje} != null">
-        <li class="list-group-item" th:each="snack:${snacksInMandje}" th:text="${snack.naam}"></li>
+        <li class="list-group-item" th:each="snack:${snacksInMandje}" th:object="${snack}">
+            <span th:text="|*{naam} EUR *{{prijs}}|"></span>
+            <input type="checkbox" name="id" th:value="*{id}">
+        </li>
+        <input class="btn btn-danger btn-block mb-4" type="submit" value="Remove Checked">
     </ul>
+        </div>
+    </form>
+    <form class="form-group col-md-4" method="post"  action="/mandje/legen">
+
+        <input class="btn btn-danger btn-block mb-4" type="submit" value="Alles legen">
+
+    </form>
+
     <script th:src="@{/js/preventDoubleSubmit.js}"></script>
 </div>
+
 </body>
 </html>

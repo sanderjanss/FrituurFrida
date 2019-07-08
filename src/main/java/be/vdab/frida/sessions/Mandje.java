@@ -24,4 +24,7 @@ public class Mandje implements Serializable {
     public void verwijder(long id){
         ids.remove(id);
     }
+    public void maakLeeg(){
+        ids.clear();
+    }
 }

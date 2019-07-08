@@ -2,6 +2,7 @@ package be.vdab.frida.controller;
 
 import be.vdab.frida.domain.Saus;
 import be.vdab.frida.services.SausService;
+import be.vdab.frida.sessions.SausRaden;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,7 @@ public class SausControllerTest {
     @Before
     public void Before() {
         when(sausService.findById(3)).thenReturn(Optional.of(new Saus(3L, "", null)));
-        controller = new SausController(sausService);
+        controller = new SausController(sausService, new SausRaden());
     }
 
     @Test

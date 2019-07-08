@@ -1,15 +1,21 @@
 package be.vdab.frida.controller;
 
 import be.vdab.frida.domain.Saus;
+import be.vdab.frida.forms.SausRadenForm;
 import be.vdab.frida.services.SausService;
+import be.vdab.frida.sessions.SausRaden;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Controller
@@ -28,13 +34,18 @@ public class SausController {
     private final char[] alfabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     private SausService sausService;
+    private final SausRaden sausRaden;
 
 
     //------------------------------------------------------------------------- METHODEN en CONSTRUCTORS
 
 
-    public SausController(SausService sausService) {
+    public SausController(SausService sausService, SausRaden sausRaden) {
+        for(char letter = 'a'; letter <= 'z'; letter++){
+            alfabet[letter - 'a'] = letter;
+        }
         this.sausService = sausService;
+        this.sausRaden = sausRaden;
     }
 
     @GetMapping
@@ -55,6 +66,35 @@ public class SausController {
     public ModelAndView sauzenBeginnendMet(@PathVariable char letter) {
         return new ModelAndView("sausAlfabet", "alfabet", alfabet)
                 .addObject("sauzen", sausService.findByNaamBegintMet(letter));
+    }
+
+    private String randomSaus() {
+        List<Saus> sauzen = sausService.findAll();
+        return sauzen.get(
+                ThreadLocalRandom.current().nextInt(sauzen.size())).getNaam();
+    }
+    @GetMapping("raden")
+    public ModelAndView radenForm() {
+        sausRaden.reset(randomSaus());
+        return new ModelAndView("sausRaden").addObject(sausRaden)
+                .addObject(new SausRadenForm(null));
+    }
+    @PostMapping("raden/nieuwspel")
+    public String radenNieuwSpel() {
+        return "redirect:/sauzen/raden";
+    }
+    @PostMapping(value = "raden")
+    public ModelAndView raden(@Valid SausRadenForm form, Errors errors) {
+        if (errors.hasErrors()) {
+            return new ModelAndView("sausRaden").addObject(sausRaden);
+        }
+        sausRaden.doeGok(form.getLetter());
+        return new ModelAndView("redirect:/sauzen/raden/volgendegok");
+    }
+    @GetMapping("raden/volgendegok")
+    public ModelAndView volgendeGok() {
+        return new ModelAndView("sausRaden").addObject(sausRaden)
+                .addObject(new SausRadenForm(null));
     }
 
 
