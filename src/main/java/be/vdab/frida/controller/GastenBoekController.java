@@ -2,7 +2,6 @@ package be.vdab.frida.controller;
 
 import be.vdab.frida.forms.GastenBoekEntryForm;
 import be.vdab.frida.services.GastenBoekService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
